@@ -63,8 +63,8 @@ const onLoadMoreBtn = async event => {
         gallery.refresh(); 
 
 
-        const galleryEl = document.querySelector('gallery-item__image');
-        const imgHeight = galleryEl.getBoundingClientRect();
+        const galleryEl = document.querySelector('.gallery-item__image');
+        const imgHeight = galleryEl.getBoundingClientRect().height;
         window.scrollBy({
             top: 2 * imgHeight,
             behavior: 'smooth',
