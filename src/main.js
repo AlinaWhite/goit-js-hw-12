@@ -21,17 +21,20 @@ const submitForm = async event => {
         event.preventDefault();
 
         searchValue = serchForm.elements.searchQuery.value.trim();
-        
+
+        currentPage =1;
         loaderQ.classList.remove('is-hidden');
 
         const response =  await fetchImages(searchValue, currentPage);
         
         if (response.data.hits.length === 0){
-              iziToast.error ({
+            loadMore.classList.add('is-hidden');
+                iziToast.error ({
                 message: "Sorry, there are no images matching your search query. Please try again!",
                 position: 'topRight',
              });
-  
+
+             
               galerySerch.innerHTML = '';
               serchForm.reset();
               return
@@ -57,7 +60,7 @@ const onLoadMoreBtn = async event => {
         const imgCard = response.data.hits
         .map(imgDetails => galleryCard(imgDetails))
         .join('');
-        currentPage =1;
+        
 
         galerySerch.insertAdjacentHTML('beforeend' ,imgCard);
         gallery.refresh(); 
@@ -71,7 +74,7 @@ const onLoadMoreBtn = async event => {
         });
 
         if (response.data.hits >= totalHits){
-            loadMore.classList.add('is-hidden');
+            loadMore.classList.remove('is-hidden');
             iziToast.error ({
               message: "We're sorry, but you've reached the end of search results.",
               position: 'topRight',
