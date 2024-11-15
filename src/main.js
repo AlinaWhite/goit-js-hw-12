@@ -11,7 +11,6 @@ const galerySerch = document.querySelector('.gallery');
 const loaderQ = document.querySelector('.loader')
 const loadMore = document.querySelector('.load-button')
 
-
 let gallery = new SimpleLightbox('.gallery a');
 let currentPage =1;
 let searchValue ='';
@@ -26,6 +25,10 @@ const submitForm = async event => {
         loaderQ.classList.remove('is-hidden');
 
         const response =  await fetchImages(searchValue, currentPage);
+
+        if( searchValue.trim() === '') {
+            return;
+        };
         
         if (response.data.hits.length === 0){
             loadMore.classList.add('is-hidden');
@@ -73,14 +76,14 @@ const onLoadMoreBtn = async event => {
             behavior: 'smooth',
         });
 
-        if (response.data.hits >= totalHits){
+        if (currentPage === Math.ceil(response.data.total / 15)){
             loadMore.classList.remove('is-hidden');
             iziToast.error ({
               message: "We're sorry, but you've reached the end of search results.",
               position: 'topRight',
            });
             return
-          }
+          };
         
     } catch(err){
         console.log(err);

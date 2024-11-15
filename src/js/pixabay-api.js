@@ -9,7 +9,7 @@ export const fetchImages = (searchValueImput, nextPageNumber) => {
         q: searchValueImput,
         image_type: 'photo',
         orientation: 'horizontal',
-        per_page: 16,
+        per_page: 15,
         page: nextPageNumber,
         safesearch: true,
         key: '46938898-491ce0dea342e81df1da49dcf',}
