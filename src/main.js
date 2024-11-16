@@ -77,7 +77,7 @@ const onLoadMoreBtn = async event => {
         });
 
         if (currentPage === Math.ceil(response.data.total / 15)){
-            loadMore.classList.remove('is-hidden');
+            loadMore.classList.add('is-hidden');
             iziToast.error ({
               message: "We're sorry, but you've reached the end of search results.",
               position: 'topRight',
